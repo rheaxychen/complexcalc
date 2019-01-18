@@ -22,19 +22,21 @@ class Calculator {
     func divide (lhs: Int, rhs: Int) -> Int { return lhs / rhs }
     
     /*--- Complex operators ---*/
-    
-    // It takes two numbers and compute the result
     func mathOp (lhs: Int, rhs: Int, op: (Int, Int) -> Int) -> Int { return op(lhs, rhs) }
-    
     func mathOp (args: [Int], beg: Int, op: (Int, Int) -> Int) -> Int {
         var total = op(beg, args[0])
         for i in 1..<args.count { total = op(total, args[i]) }
         return total
     }
     
-    // Alternate operators
+    /*--- Alternate operators ---*/
+    
+    // in tulples (points)
     func add (lhs: (Int, Int), rhs: (Int, Int)) -> (Int, Int) { return (lhs.0 + rhs.0, lhs.1 + rhs.1) }
     func subtract (lhs: (Int, Int), rhs: (Int, Int)) -> (Int, Int) { return (lhs.0 - rhs.0, lhs.1 - rhs.1) }
+    
+    func count (_ args: [Int]) -> Int { return args.count }
+    func avg (_ args: [Int]) -> Int { return add(args) / count(args) }
     
     func add (_ args: [Int]) -> Int {
         var sum : Int = 0
@@ -48,13 +50,11 @@ class Calculator {
         return res
     }
     
-    func count (_ args: [Int]) -> Int { return args.count }
-    func avg (_ args: [Int]) -> Int { return add(args) / count(args) }
     
+    // Cartesian points (x,y pairs), in String to Integer dictionary
     func add (lhs: [String: Int], rhs: [String: Int]) -> [String: Int] {
         return ["x": lhs["x"]! + rhs["x"]!, "y": lhs["y"]! + rhs["y"]!]
     }
-    
     func subtract (lhs: [String: Int], rhs: [String: Int]) -> [String: Int] {
         return ["x": lhs["x"]! - rhs["x"]!, "y": lhs["y"]! - rhs["y"]!]
     }
